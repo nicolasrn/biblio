@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="UTF-8">
+    <title>Bibliothèque</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap-theme.css' />
+    <script src="/javascripts/jquery-2.1.4.js"></script>
+    <script src="/javascripts/app.js"></script>
+  </head>
+  <body>
+  	<div class="container-fluid">
+  		<section>
+	  		<div class="row">
+	  			<div class="col-md-12">
+				    <h1><%= title %></h1>
+				    <h2>Welcome to <%= title %></h2>
+				</div>
+		    </div>
+	    </section>
+	    
+	    <section>
+		    <div class="row">
+		    	<div class="col-md-12">
+				    <form class="form-horizontal">
+				    	<div class="form-group">
+				    		<label class="sr-only" for="query">Rechercher</label>
+				    		<div class="col-md-offset-2 col-md-8">
+								<input type="text" class="form-control" name="query" placeholder="Rechercher" id="query" value="<%= query %>"/>
+							</div>
+						</div>
+				    </form>
+			    </div>
+		    </div>
+	    </section>
+	    
+	    <section>
+		    <div class="row">
+		    	<div class="col-md-12">
+				    <table class="table recherche">
+				    	<tr>
+				    		<th>série</th>
+				    		<th>titre</th>
+				    		<th>numéro</th>
+				    		<th>année</th>
+				    		<th>auteur</th>
+				    	</tr>
+				    </table>
+				</div>
+		    </div>
+	    </section>
+    </div>
+  </body>
+</html>
