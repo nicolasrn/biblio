@@ -15,7 +15,7 @@ function normalSort(champ, ordre) {
 			retour = -1;
 		}
 		return retour * ordre; 
-	}
+	};
 }
 
 function naturalSort (champ, ordre) {
@@ -35,7 +35,13 @@ function naturalSort (champ, ordre) {
 	        else if(a1!= b1) return a1 > b1 ? 1 : -1 * ordre;
 	    }
 	    return (a.length- b.length) * ordre;
-	}
+	};
+}
+
+function gererErreur(err, res) {
+	console.log(err);
+	res.send('erreur serveur');
+	return ;
 }
 
 /* GET home page. */
@@ -43,6 +49,54 @@ router.get('/', function(req, res, next) {
 	res.render('index', {
 		title: 'Let\'s go',
 		query: req.query.query
+	});
+});
+
+router.get('/update/init', function(req, res, next) {
+	fs.readFile('./public/ressources/livre.json', 'utf8', function(err, data) {
+		if (err) {
+			return gererErreur(err, res);
+		}
+		data = JSON.parse(data);
+		var sort = data.config;
+		
+		_.each(data.livre, function(element, index, list) {
+			element.id = index + 1;
+		});
+		
+		res.charset = 'utf8';
+		res.set('Content-Type', 'text/json');
+		res.send(data);
+	});
+});
+
+router.post('/update', function(req, res, next) {
+	console.log('dans update');
+	fs.readFile('./public/ressources/livre.json', 'utf8', function(err, data) {
+		if (err) {
+			return gererErreur(err, res);
+		}
+		console.log('lecture du fichier avece success');
+		data = JSON.parse(data);
+		console.log('debut du tri');
+		data.livre = data.livre.sort(function(a, b) {
+			return a.id - b.id;
+		});
+		console.log('tri terminé');
+		
+		_.each(req.body, function (element, index, list) {
+			data.livre[list.id - 1][index] = list[index];
+		});
+		console.log('modification des données');
+		
+		fs.writeFile("./public/ressources/livre.json", JSON.stringify(data), 'utf8', function(err) {
+			console.log('écriture des résultats');
+		    if(err) {
+		        return console.log(err);
+		    }
+		    res.set('Content-Type', 'text/html');
+		    res.send();
+		}); 
 	});
 });
 
@@ -54,7 +108,7 @@ router.get('/search', function(req, res, next) {
 		if (err) {
 			return console.log(err);
 		}
-		var data = JSON.parse(data);
+		data = JSON.parse(data);
 		var sort = data.config;
 		
 		data = _.filter(data.livre, function (item) {

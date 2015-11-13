@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/bs/jq-2.1.4,dt-1.10.10/datatables.css"/>
     <script src="/javascripts/jquery-2.1.4.js"></script>
     <script src="/javascripts/bootstrap.js"></script>
-	<script type="text/javascript" src="https://cdn.datatables.net/s/bs/jq-2.1.4,dt-1.10.10/datatables.js"></script>
     <script src="/javascripts/app.js"></script>
   </head>
   <body>
@@ -26,7 +25,7 @@
 	    <section>
 		    <div class="row">
 		    	<div class="col-md-12">
-				    <form class="form-horizontal" method="get">
+				    <form id="search" class="form-horizontal">
 				    	<div class="form-group">
 				    		<label class="sr-only" for="query">Rechercher</label>
 				    		<div class="col-md-offset-2 col-md-8">
@@ -41,13 +40,13 @@
 	    <section>
 		    <div class="row">
 		    	<div class="col-md-12">
-				    <table class="table recherche">
+				    <table class="table table-hover recherche">
 				    	<tr>
-				    		<th><a href="#" id="serie">série</a></th>
-				    		<th><a href="#" id="titre">titre</a></th>
-				    		<th><a href="#" id="numero">numéro</a></th>
-				    		<th><a href="#" id="annee">année</a></th>
-				    		<th><a href="#" id="auteur">auteur</a></th>
+				    		<th class="col-md-2"><a href="#" id="serie">série</a></th>
+				    		<th class="col-md-5"><a href="#" id="titre">titre</a></th>
+				    		<th class="col-md-1"><a href="#" id="numero">numéro</a></th>
+				    		<th class="col-md-1"><a href="#" id="annee">année</a></th>
+				    		<th class="col-md-3"><a href="#" id="auteur">auteur</a></th>
 				    	</tr>
 				    </table>
 				</div>
