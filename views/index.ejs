@@ -13,12 +13,13 @@
   </head>
   <body>
   	<div class="container-fluid">
-  		<section>
-	  		<div class="row">
-	  			<div class="col-md-12">
-				    <h1><%= title %></h1>
-				    <h2>Welcome to <%= title %></h2>
-				</div>
+  		<section class="jumbotron">
+  			<div class="container">
+		  		<div class="row">
+		  			<div class="col-md-12">
+					    <h1><%= title %></h1>
+					</div>
+			    </div>
 		    </div>
 	    </section>
 		
@@ -29,7 +30,7 @@
 				    	<div class="form-group">
 				    		<label class="sr-only" for="query">Rechercher</label>
 				    		<div class="col-md-offset-2 col-md-8">
-								<input type="text" class="form-control" name="query" id="query" value="<%= query %>"/>
+								<input type="text" class="form-control" placeholder="Rechercher" name="query" id="query" value="<%= query %>"/>
 							</div>
 						</div>
 				    </form>
