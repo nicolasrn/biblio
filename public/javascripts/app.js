@@ -59,11 +59,16 @@
 					url: $(this).attr('action'),
 					method: $(this).attr('method'),
 					data: $(this).serialize(),
-					success: function(data) {
+					success: function(data, textStatus, jqXHR) {
 						$form.parents('tr').remove();
+					}, 
+					complete: function(jqXHR, textStatus) {
+						rafraichir(getQuery(), getSort());						
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						alert(textStatus + " " + errorThrown);
 					}
 				}); 
-				rafraichir(getQuery(), getSort());
 				return false;
 			});
 			
@@ -106,24 +111,32 @@
 			data : {
 				q:query,
 				s:sort
+			},
+			success : function(data, textStatus, jqXHR) {
+				$('table.recherche').find('tbody').children().not(':first').off('dblclick');
+				$('table.recherche').find('tbody').children().not(':first').remove();
+				$('table.recherche').find('tbody').append($.map(data, function (item) {
+					var $ligne = $('<tr>');
+					$ligne.append($('<td>').text(item.serie));
+					$ligne.append($('<td>').text(item.titre));
+					$ligne.append($('<td>').text(item.numero));
+					$ligne.append($('<td>').text(item.annee));
+					$ligne.append($('<td>').text(item.auteur));
+					$ligne.append($('<td>').addClass('sr-only').text(item.id));
+					
+					$ligne.on('dblclick', function(event) {
+						$(this).ajouterFormulaire();
+					});
+					
+					return $ligne;
+				}));
+			},
+			complete: function(jqXHR, textStatus) {
+				
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert(textStatus + " " + errorThrown);
 			}
-		}).success(function(data) {
-			$('table.recherche').find('tbody').children().not(':first').remove();
-			$('table.recherche').find('tbody').append($.map(data, function (item) {
-				var $ligne = $('<tr>');
-				$ligne.append($('<td>').text(item.serie));
-				$ligne.append($('<td>').text(item.titre));
-				$ligne.append($('<td>').text(item.numero));
-				$ligne.append($('<td>').text(item.annee));
-				$ligne.append($('<td>').text(item.auteur));
-				$ligne.append($('<td>').addClass('sr-only').text(item.id));
-				
-				$ligne.on('dblclick', function(event) {
-					$(this).ajouterFormulaire();
-				});
-				
-				return $ligne;
-			}));
 		});
 	}
 	
