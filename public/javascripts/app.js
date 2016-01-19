@@ -63,7 +63,7 @@
 						$form.parents('tr').remove();
 					}, 
 					complete: function(jqXHR, textStatus) {
-						rafraichir(getQuery(), getSort());						
+						rafraichir(getQuery(), getSort());
 					},
 					error: function(jqXHR, textStatus, errorThrown) {
 						alert(textStatus + " " + errorThrown);
